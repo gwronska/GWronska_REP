@@ -1,85 +1,47 @@
-/* Resetowanie domyślnych marginesów i wypełnień */
-html, body, p {
+/* Resetowanie marginesów */
+* {
     margin: 0;
     padding: 0;
-    height: 100%; /* Umożliwia stopce być na dole */
 }
 
-/* Ustawienie czcionki i koloru */
-body {
-    font-family: Verdana, sans-serif;
+/* Wybranie box sizing */
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Dodanie fontu Verdana */
+* {
+    font-family: Verdana, sans-serif; 
     font-size: 16px;
     font-weight: normal;
+    text-decoration: none;
     color: black;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column; /* Umożliwienie rozciągania się body */
 }
 
-/* Nagłówek strony */
+/* Dodanie sticky footer */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dodanie flexboxa i paddingu */
 header {
     display: flex;
-    align-items: center; /* Wyrównanie elementów w pionie */
+    align-items: center;
     padding: 30px;
 }
 
-/* Logo i tytuł */
-.logo {
-    margin-right: 15px; /* Odstęp między logo a tytułem */
-}
-
-h1 {
-    font-size: 2em;
-    margin-left: 15px;
-}
-
-/* Nawigacja */
-nav {
-    display: flex;
-    flex-grow: 2; /* Sekcja z linkami większa niż logo i tytuł */
-    justify-content: flex-end; /* Przesunięcie linków do prawej */
-    align-items: flex-start; /* Przesunięcie linków do górnej krawędzi */
-    width: 100%;
-}
-
-nav a {
-    text-decoration: none;
-    padding: 10px;
-    width: 75px;
-    text-align: center;
-}
-
-/* Sekcja główna */
 main {
     display: flex;
-    flex-wrap: wrap;
-    padding: 15px;
-    flex: 1; /* Rozciąga main, aby zajął całą dostępną przestrzeń */
-}
-
-article {
     flex: 1;
-    margin: 15px;
+    flex-direction: row;
     padding: 15px;
-    text-align: justify; /* Justowanie tekstu */
-    border: 2px solid black;
-    width: calc(33.33% - 30px); /* Szerokość artykułów z uwzględnieniem marginesów */
-    display: flex; /* Umożliwienie użycia flexboxa w artykule */
-    flex-direction: column; /* Ustawienie kierunku kolumnowego */
-}
-
-article h2 {
-    background-color: lightgray;
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-    padding: 15px;
-    height: 50px;
-    font-size: 1.5em;
-    align-self: flex-end; /* Ustawienie nagłówka w prawym górnym rogu */
-    width: 50%; /* Szerokość nagłówka */
-    display: flex; /* Umożliwienie użycia flexboxa w nagłówku */
-    justify-content: flex-end; /* Wyrównanie tekstu do prawej */
-    align-items: flex-start; /* Wyrównanie tekstu do góry */
+    border: 2px solid black; 
 }
 
 /* Stopka */
@@ -103,40 +65,104 @@ footer p:last-child {
     font-weight: bold;
 }
 
-/* Dodanie stylów dla hamburgera */
-.hamburger {
-    display: none; /* Ukryj hamburgera domyślnie */
+
+/* Dodanie tytułu w nagłówku */
+h1 {
+    margin-left: 15px; 
+    font-weight: bold;
+    font-size: 2em; /* Czcionka dwa razy większa */
+}
+
+/* Sekcja z linkami */
+nav {
+    display: flex;
+    flex-grow: 2;
+    align-self: flex-start;
+    justify-content: flex-end;
+}
+
+nav a {
+    width: 75px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Dodanie do article marginesów */
+article {
+    margin: 15px;
+    height: 200px;
+    width: 100%;
+    border: 2px solid black;
+    box-sizing: border-box;
+    display: flex;
     flex-direction: column;
-    cursor: pointer;
 }
 
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: black;
-    margin: 4px;
+/* Nagłówki w article */
+article h2 {
+    height: 50px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    align-self: flex-end;
+    background-color: lightgrey;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
 }
 
-/* Styl dla mniejszych ekranów */
-@media all and (max-width: 900px) {
+/* Justowanie */
+article p {
+    text-align: justify;
+    padding: 15px;
+}
+
+
+.hamburger {
+    display: none; 
+}
+
+/* Obsługa małych ekranów */
+@media (max-width: 900px) {
     header {
-        flex-direction: column; /* Przestawienie elementów w kolumnie */
-        align-items: flex-start; /* Wyrównanie do lewej */
+        flex-direction: column; 
+        align-items: center; 
     }
 
     main {
-        flex-direction: column; /* Zmiana kierunku na kolumnowy */
+        flex-direction: column; 
     }
 
-    nav, h1 {
-        display: none; /* Ukrycie nawigacji i tytułu */
+    article {
+        width: 90%; 
+        margin: 10px auto; 
     }
 
-    .logo {
-        justify-content: space-between;
+    footer {
+        align-items: center;
     }
 
+    /* Zniknięcie tytułu i nawigacji na małych ekranach */
+    h1 {
+        display: none; 
+    }
+    
+    nav {
+        display: none; 
+    }
+    
+    /* Pokaż hamburger */
     .hamburger {
-        display: flex; /* Pokazanie hamburgera w wersji mobilnej */
+        display: block; 
+        width: 32px; 
+        height: 32px;
+    }
+    
+   
+    header {
+        justify-content: space-between; 
+        flex-direction: row; 
+        align-items: center; 
     }
 }
