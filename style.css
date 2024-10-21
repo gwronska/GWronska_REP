@@ -2,6 +2,7 @@
 html, body, p {
     margin: 0;
     padding: 0;
+    height: 100%; /* Umożliwia stopce być na dole */
 }
 
 /* Ustawienie czcionki i koloru */
@@ -11,18 +12,20 @@ body {
     font-weight: normal;
     color: black;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Umożliwienie rozciągania się body */
 }
 
 /* Nagłówek strony */
 header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: center; /* Wyrównanie elementów w pionie */
     padding: 30px;
 }
 
+/* Logo i tytuł */
 .logo {
-    margin-bottom: 15px;
+    margin-right: 15px; /* Odstęp między logo a tytułem */
 }
 
 h1 {
@@ -30,9 +33,12 @@ h1 {
     margin-left: 15px;
 }
 
+/* Nawigacja */
 nav {
     display: flex;
-    justify-content: flex-end;
+    flex-grow: 2; /* Sekcja z linkami większa niż logo i tytuł */
+    justify-content: flex-end; /* Przesunięcie linków do prawej */
+    align-items: flex-start; /* Przesunięcie linków do górnej krawędzi */
     width: 100%;
 }
 
@@ -48,14 +54,18 @@ main {
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
+    flex: 1; /* Rozciąga main, aby zajął całą dostępną przestrzeń */
 }
 
 article {
     flex: 1;
     margin: 15px;
     padding: 15px;
+    text-align: justify; /* Justowanie tekstu */
     border: 2px solid black;
-    width: 100%;
+    width: calc(33.33% - 30px); /* Szerokość artykułów z uwzględnieniem marginesów */
+    display: flex; /* Umożliwienie użycia flexboxa w artykule */
+    flex-direction: column; /* Ustawienie kierunku kolumnowego */
 }
 
 article h2 {
@@ -63,10 +73,13 @@ article h2 {
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     padding: 15px;
-    text-align: center;
     height: 50px;
     font-size: 1.5em;
-    align-self: flex-end;
+    align-self: flex-end; /* Ustawienie nagłówka w prawym górnym rogu */
+    width: 50%; /* Szerokość nagłówka */
+    display: flex; /* Umożliwienie użycia flexboxa w nagłówku */
+    justify-content: flex-end; /* Wyrównanie tekstu do prawej */
+    align-items: flex-start; /* Wyrównanie tekstu do góry */
 }
 
 /* Stopka */
@@ -90,17 +103,40 @@ footer p:last-child {
     font-weight: bold;
 }
 
-/* Zapytanie Media dla mniejszych ekranów */
+/* Dodanie stylów dla hamburgera */
+.hamburger {
+    display: none; /* Ukryj hamburgera domyślnie */
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 4px;
+}
+
+/* Styl dla mniejszych ekranów */
 @media all and (max-width: 900px) {
+    header {
+        flex-direction: column; /* Przestawienie elementów w kolumnie */
+        align-items: flex-start; /* Wyrównanie do lewej */
+    }
+
     main {
-        flex-wrap: wrap;
+        flex-direction: column; /* Zmiana kierunku na kolumnowy */
     }
 
     nav, h1 {
-        display: none;
+        display: none; /* Ukrycie nawigacji i tytułu */
     }
 
     .logo {
         justify-content: space-between;
+    }
+
+    .hamburger {
+        display: flex; /* Pokazanie hamburgera w wersji mobilnej */
     }
 }
